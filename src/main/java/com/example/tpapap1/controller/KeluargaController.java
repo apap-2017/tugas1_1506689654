@@ -27,6 +27,12 @@ public class KeluargaController {
     @Autowired
     PendudukService pendudukDAO;
 
+    /**
+     * Method untuk Lihat keluarga berdasarkan NIK
+     * @param nkk
+     * @param model
+     * @return halaman view keluarga jika ditemukan jika tidak not found
+     */
     @RequestMapping(method = RequestMethod.GET, value="/keluarga")
     public  String searchKeluarga  (
             @RequestParam(value = "nkk", required = true) String nkk,
@@ -42,6 +48,11 @@ public class KeluargaController {
         }
     }
 
+    /**
+     * Method untuk menambah keluarga
+     * @param model
+     * @return form keluarga
+     */
     @RequestMapping(method = RequestMethod.GET,value = "/keluarga/tambah")
     public String addKeluarga(Model model){
         KeluargaModel keluarga = new KeluargaModel();
@@ -49,6 +60,14 @@ public class KeluargaController {
         return "form-keluarga";
     }
 
+    /**
+     * Method untuk menambah keluarga
+     * @param nama_kelurahan
+     * @param model
+     * @param keluarga
+     * @return page keluarga berhasil di add!
+     * @throws Exception
+     */
     @RequestMapping(method = RequestMethod.POST, value="/keluarga/tambah")
     public String addSubmit (
             @RequestParam (value = "nama_kelurahan", required = false) String nama_kelurahan,
@@ -60,6 +79,12 @@ public class KeluargaController {
         return "keluarga-success-add";
     }
 
+    /**
+     * method untuk update keluarga
+     * @param nkk
+     * @param model
+     * @return form-keluarga-update untuk mengupdate
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/keluarga/ubah/{nkk}")
     public String updatePenduduk(@PathVariable (value = "nkk") String nkk, Model model){
         KeluargaModel keluarga = keluargaDAO.selectKeluarga(nkk);
@@ -78,6 +103,14 @@ public class KeluargaController {
         return "not-found";
     }
 
+    /**
+     * method untuk mengupdate keluarga
+     * @param keluarga
+     * @param nkk
+     * @param nama_kelurahan
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/keluarga/ubah/{nkk}")
     public String updateSubmit( KeluargaModel keluarga,
             @PathVariable (value = "nkk") String nkk,@RequestParam(value = "nama_kelurahan") String nama_kelurahan

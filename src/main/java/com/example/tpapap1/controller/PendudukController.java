@@ -31,9 +31,19 @@ public class PendudukController {
     @Autowired
     KeluargaService keluargaDAO;
 
+    /**
+     * Method halaman utama untuk mencari penduduk dan keluarga
+     * @return index
+     */
     @RequestMapping("/")
     public  String index () { return "index";}
 
+    /**
+     * Method untuk mencari penduduk berdasarkan NIK
+     * @param nik
+     * @param model
+     * @return view-penduduk
+     */
     @RequestMapping(method = RequestMethod.GET, value="/penduduk")
     public  String searchPenduduk  (
             @RequestParam(value = "nik", required = true) String nik,
@@ -49,6 +59,11 @@ public class PendudukController {
        }
     }
 
+    /**
+     * Method untuk menambag penduduk
+     * @param model
+     * @return form-penduduk
+     */
     @RequestMapping(method = RequestMethod.GET,value = "/penduduk/tambah")
     public String addPenduduk(Model model){
         PendudukModel penduduk = new PendudukModel();
@@ -56,6 +71,15 @@ public class PendudukController {
         return "form-penduduk";
     }
 
+    /**
+     * Method untuk menambah penduduk
+     * @param id_keluarga
+     * @param tgl_lahir
+     * @param model
+     * @param penduduk
+     * @return penduduk berhasil ditambahkan
+     * @throws Exception
+     */
     @RequestMapping(method = RequestMethod.POST, value="/penduduk/tambah")
     public String addSubmit (
             @RequestParam (value = "id_keluarga", required = false) String id_keluarga,
@@ -71,6 +95,12 @@ public class PendudukController {
         return "penduduk-success-add";
     }
 
+    /**
+     * Method untuk mengupdate penduduk
+     * @param nik
+     * @param model
+     * @return form update jika nik penduduk ditemukan jika tidak not found
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/penduduk/ubah/{nik}")
     public String updatePenduduk(@PathVariable (value = "nik") String nik, Model model) {
         PendudukModel penduduk = pendudukDAO.selectPenduduk(nik);
@@ -94,6 +124,16 @@ public class PendudukController {
         return "not-found";
     }
 
+    /**
+     * method untuk mengupdate penduduk
+     * @param penduduk
+     * @param tgl_lahir
+     * @param nik
+     * @param id_keluarga
+     * @return penduduk berhasil diupdate
+     * @throws Exception
+     */
+
     @RequestMapping(value = "/penduduk/ubah/{nik}", method = RequestMethod.POST)
     public String updateSubmit (
             PendudukModel penduduk,
@@ -107,6 +147,12 @@ public class PendudukController {
         return "penduduk-success-update";
     }
 
+    /**
+     * Method untuk mengubah status kematian penduduk
+     * @param nik
+     * @param redirectAttributes
+     * @return penduduk berhasil dinonaktifkan
+     */
     @RequestMapping (value = "/penduduk/mati", method = RequestMethod.POST)
     public String pendudukMati(@RequestParam(value = "nik") String nik, RedirectAttributes redirectAttributes){
         pendudukDAO.pendudukWafat(nik);
@@ -115,6 +161,14 @@ public class PendudukController {
         return "redirect:/penduduk?nik="+ nik;
     }
 
+    /**
+     * Method untuk mencari penduduk berdasarkan kota,kecamatan, dan kelurahan
+     * @param id_kota
+     * @param id_kecamatan
+     * @param id_kelurahan
+     * @param model
+     * @return daftar penduduk yang terdaftar didaerah tersebut
+     */
     @RequestMapping (value = "/penduduk/cari", method = RequestMethod.GET)
     public String cariData(
             @RequestParam(value= "kt", required = false) String id_kota,

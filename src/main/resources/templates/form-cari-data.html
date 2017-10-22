@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../js/materialize.min.js"></script>
+
+<script type="text/javascript" src="../../js/jsplugin.js"></script>
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo center">SI Kependudukan</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="/">Home</a></li>
+            <li><a href="/penduduk/tambah">Tambah Penduduk</a></li>
+            <li><a href="/keluarga/tambah">Tambah Keluarga</a></li>
+            <li><a href="/penduduk/cari">Cari Data</a></li>
+        </ul>
+    </div>
+</nav>
+<br/>
+<br/>
+<div class="container">
+    <form class="col s6" action="/penduduk/cari" method="get">
+        <h5 th:if="${flagkota == 'false'}" th:text="'Lihat Data Penduduk Berdasarkan Kota'"></h5>
+        <h5 th:if="${flagkota == 'true' and flagkecamatan == 'false'}" th:text="'Lihat Data Penduduk Berdasarkan Kecamatan di '+ ${nama_kota}"></h5>
+        <h5 th:if="${flagkota == 'true' and flagkecamatan == 'true'}" th:text="'Lihat Data Penduduk Berdasarkan Kelurahan di '+ ${nama_kota}  + ', Kecamatan ' + ${nama_kecamatan}"></h5>
+
+        <div class="row">
+
+            <div class="input-field col s6">
+                <div th:if="${flagkota == 'true'}" name="kota" th:value="${id_kota}">
+                    <select>
+                    <option disabled ="disabled" selected="selected" th:text="${nama_kota}"></option>
+                    </select>
+                    <label >Kota/Kabupaten</label>
+                    <input hidden="hidden" th:value="${id_kota}" name="kt"/>
+
+                </div>
+                <div th:if="${flagkota == 'false'}" name="kota">
+                    <select name="kt">
+                        <option th:value="0" disabled="disabled" selected="selected">Pilih Kota/Kabupaten</option>
+                        <div th:each= "kota,iterationStatus: ${kotas}">
+                        <option th:value="${kota.kode_kota}" th:text="${kota.nama_kota}"></option>
+                        </div>
+                    </select>
+                    <label >Kota/Kabupaten</label>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="input-field col s6">
+                <div th:if="${flagkecamatan == 'true'}" name="kecamatan" th:value="${id_kecamatan}">
+                    <select>
+                        <option disabled="disabled" selected="selected"  th:text="${nama_kecamatan}"></option>
+                    </select>
+                    <label >Kecamatan</label>
+                    <input hidden="hidden" th:value="${id_kecamatan}" name="kc"/>
+
+
+                </div>
+                <div th:if="${flagkecamatan == 'false'}" name="kecamatan">
+                    <select name="kc">
+                        <option th:value="0" disabled="disabled" selected="selected">Pilih Kecamatan</option>
+                        <div th:each= "kecamatan,iterationStatus: ${kecamatans}">
+                            <option th:value="${kecamatan.kode_kecamatan}" th:text="${kecamatan.nama_kecamatan}"></option>
+                        </div>
+                    </select>
+                    <label >Kecamatan</label>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="input-field col s6">
+                <div th:if="${flagkelurahan == 'false'}" name="kelurahan">
+                    <select name="kl">
+                        <option th:value="0" disabled="disabled" selected="selected">Pilih Kelurahan</option>
+                        <div th:each= "kelurahan,iterationStatus: ${kelurahans}">
+                            <option th:value="${kelurahan.kode_kelurahan}" th:text="${kelurahan.nama_kelurahan}"></option>
+                        </div>
+                    </select>
+                    <label >Kelurahan</label>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <button class="btn waves-effect waves-light" type="submit" >Lihat
+            </button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

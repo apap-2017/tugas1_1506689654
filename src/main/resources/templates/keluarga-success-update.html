@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="../../css/materialize.min.css"  media="screen,projection"/>
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../js/materialize.min.js"></script>
+
+<script type="text/javascript" src="../../js/jsplugin.js"></script>
+
+<nav>
+	<div class="nav-wrapper">
+		<a href="index.html" class="brand-logo center">SI Kependudukan</a>
+		<ul id="nav-mobile" class="left hide-on-med-and-down">
+			<li><a href="/">Home</a></li>
+			<li><a href="/penduduk/tambah">Tambah Penduduk</a></li>
+			<li><a href="/keluarga/tambah">Tambah Keluarga</a></li>
+			<li><a href="/penduduk/cari">Cari Data</a></li>
+		</ul>
+	</div>
+</nav>
+<br/>
+<br/>
+<div class="container">
+
+	<h3>Sukses!</h3>
+	<h5 th:text="'Keluarga dengan NKK - ' + ${nkk} + ' berhasil diubah'">Keluarga dengan NKK - </h5>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../js/materialize.min.js"></script>
+<script type="text/javascript" src="../../js/jsplugin.js"></script>
+
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo center">SI Kependudukan</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="/">Home</a></li>
+            <li><a href="/penduduk/tambah">Tambah Penduduk</a></li>
+            <li><a href="/keluarga/tambah">Tambah Keluarga</a></li>
+            <li><a href="/penduduk/cari">Cari Data</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h4>Ubah Keluarga</h4>
+    <br/>
+    <div class="row">
+        <form class="col s12" th:object="${keluarga}" th:action="'/keluarga/ubah/' + ${keluarga.nomor_kk}" method="post">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:field="*{alamat}" th:value="${alamat}" placeholder="Masukan Alamat Rumah" id="alamat" type="text" class="validate"/>
+                    <label for="alamat">Alamat</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:field="*{rt}" th:value="${rt}" placeholder="Masukan No.RT Rumah " id="rtrumah" type="text" class="validate"/>
+                    <label for="rtrumah">RT</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:field="*{rw}" th:value="${rw}" placeholder="Masukan No.RT Rumah" id="rwrumah"  type="text" class="validate"/>
+                    <label for="rwrumah">RW</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input name="nama_kelurahan" th:value="${nama_kelurahan}" placeholder="Masukan Nama Kelurahan" id="kelurahan" type="text" class="validate"/>
+                    <label for="kelurahan">Kelurahan/Desa</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:value="${nama_kecamatan}" placeholder="Masukan Nama Kecamatan" id="kecamatan" type="text" class="validate"/>
+                    <label for="kecamatan">Kecamatan</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:value="${nama_kota}" placeholder="Masukan Nama Kota" id="kota" type="text" class="validate"/>
+                    <label for="kota">Kota</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <button class="btn waves-effect waves-light" type="submit" >Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

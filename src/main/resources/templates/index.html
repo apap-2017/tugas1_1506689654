@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo center">SI Kependudukan</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="/">Home</a></li>
+            <li><a href="/penduduk/tambah">Tambah Penduduk</a></li>
+            <li><a href="/keluarga/tambah">Tambah Keluarga</a></li>
+            <li><a href="/penduduk/cari">Cari Data</a></li>
+        </ul>
+    </div>
+</nav>
+
+    <div class="container">
+        <!-- Page Content goes here -->
+        <h4>Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</h4>
+        <h6>Selamat datang di Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</h6>
+        <hr/>
+
+        <h7>Lihat Data Penduduk Berdasarkan NIK</h7>
+        <div class="row">
+            <form method="get" action="/penduduk" class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input name="nik" placeholder="Masukan nomor NIK" id="nik" type="text" class="validate"/>
+                        <label for="nik">Masukan Nomor Induk Kependudukan</label>
+                        <button class="btn waves-effect waves-light" type="submit" >Lihat
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <hr/>
+        </div>
+
+
+        <h7>Lihat Data Keluarga Berdasarkan NKK</h7>
+        <div class="row">
+            <form method="get" action="/keluarga" class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input name="nkk" placeholder="Masukan nomor NKK" id="nkk" type="text" class="validate"/>
+                        <label for="nkk">Masukan Nomor KK</label>
+                        <button class="btn waves-effect waves-light" type="submit" >Lihat
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <hr/>
+        </div>
+    </div>
+
+</body>
+</html>

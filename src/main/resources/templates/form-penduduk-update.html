@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../js/materialize.min.js"></script>
+<script type="text/javascript" src="../../js/jsplugin.js"></script>
+
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo center">SI Kependudukan</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="/">Home</a></li>
+            <li><a href="/penduduk/tambah">Tambah Penduduk</a></li>
+            <li><a href="/keluarga/tambah">Tambah Keluarga</a></li>
+            <li><a href="/penduduk/cari">Cari Data</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h4>Ubah Penduduk</h4>
+    <br/>
+    <div class="row">
+        <form class="col s12" th:object="${penduduk}" th:action="'/penduduk/ubah/' + ${penduduk.nik}" method="post">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:value="${nama}" th:field="*{nama}" placeholder="Masukan Nama" id="name" type="text" class="validate"/>
+                    <label for="name">Nama Lengkap</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <select th:value="${jenis_kelamin}" th:field="*{jenis_kelamin}">
+                        <option th:value="3" disabled="disabled" selected="selected">Pilih Jenis Kelamin</option>
+                        <option th:value="1">Perempuan</option>
+                        <option th:value="0">Laki-laki</option>
+                    </select>
+                    <label>Jenis Kelamin</label>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:value="${tempat_lahir}" th:field="*{tempat_lahir}" placeholder="Masukan kota kelahiran" id="tempatlahir" type="text" class="validate"/>
+                    <label for="tempatlahir">Tempat Lahir</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:value="${tgl_lahir}" name="tgl_lahir" placeholder="yyyy-mm-dd" id="tanggallahir"  type="text" class="validate"/>
+                    <label for="tanggallahir">Tanggal Lahir</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select th:field="*{golongan_darah}">
+                        <option value="0" disabled="disabled" selected="selected">Pilih Status Golongan Darah</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                    <label >Golongan Darah</label>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:value="${agama}" th:field="*{agama}" placeholder="Cth: Islam, Kristen, Buddha, dll" id="agama" type="text" class="validate"/>
+                    <label for="agama">Agama</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                        <select th:value="${status_perkawinan}" th:field="*{status_perkawinan}">
+                            <option th:value="0" disabled="disabled" selected="selected">Pilih Status Perkawinan</option>
+                            <option th:value="kawin">Kawin</option>
+                            <option th:value="belumkawin">Belum Kawin</option>
+                        </select>
+                    <label>Status Perkawinan</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:value="${pekerjaan}" th:field="*{pekerjaan}" placeholder="Cth: Pegawai, Guru, dll" id="pekerjaan" type="text" class="validate"/>
+                    <label for="pekerjaan">Pekerjaan</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:value="${status_dalam_keluarga}" th:field="*{status_dalam_keluarga}" placeholder="Cth: Kepala keluarga, Anak" id="status_dalam_keluarga" type="text" class="validate"/>
+                    <label for="status_dalam_keluarga">Status dalam keluarga</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select th:value="${is_wni}" th:field="*{is_wni}">
+                        <option th:value="3" disabled="disabled" selected="selected">Pilih Kewarganegaraan</option>
+                        <option th:value="1">WNI</option>
+                        <option th:value="0">WNA</option>
+                    </select>
+                    <label>Kewarganegaraan</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select th:value="${is_wafat}" th:field="*{is_wafat}">
+                        <option th:value="3" disabled="disabled" selected="selected">Pilih Status Kematian</option>
+                        <option th:value="1">Mati</option>
+                        <option th:value="0">Hidup</option>
+                    </select>
+                    <label>Status Kematian</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input th:value="${id_keluarga}" name="id_keluarga" placeholder="Masukan id_keluarga" id="idkeluarga" type="text" class="validate"/>
+                    <label for="idkeluarga">id keluarga</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <button class="btn waves-effect waves-light" type="submit" >Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>la
